@@ -1,12 +1,12 @@
-const catchasync = (controllers) => {
+const catchAsync = (controller) => {
     return async (req, res, next) => {
         try {
-            controllers(req, res, next);
+            await controller(req, res, next);
         } catch (err) {
-            console.log(err, "From catch Async");
-            return nez;
+            console.error(err, "From catchAsync");
+            next(err);
         }
     };
 };
 
-export default catchasync;
+export default catchAsync;

@@ -12,12 +12,10 @@ const app = express();
 configDotenv();
 const PORT = process.env.PORT || 8001;
 
-console.log(process.env.PORT);
 app.use(cors({ credentials: true, origin: "*" }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 
-app.use(catchError);
 app.use("/api/auth", auth);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api", cart);
@@ -25,6 +23,7 @@ app.get("/", (req, res) => {
     res.status(200).json({ message: "Welcome to Dayspring API" });
 });
 
+app.use(catchError);
 app.listen(PORT, () => {
     console.log("Server is running in PORT: " + PORT);
 });

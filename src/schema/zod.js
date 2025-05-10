@@ -13,7 +13,7 @@ export const loginSchema = z
             .string()
             .email({ message: "Invalid email format" })
             .regex(emailRegex, { message: "Invalid email format" }),
-        password: z.string().min(8),
+        password: z.string(),
     })
     .strict();
 

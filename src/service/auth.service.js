@@ -56,14 +56,13 @@ export const login = async (data, res) => {
             message: "Invalid Credentials",
         });
     }
-    const isPasswordValid = bcrypt.compare(data.password, user.password);
+    const isPasswordValid = await bcrypt.compare(data.password, user.password);
     if (!isPasswordValid) {
         return res.status(400).json({
             message: "Invalid Credentials",
         });
     }
     delete user.password;
-
     const token = jwt.sign(
         {
             id: user.id,

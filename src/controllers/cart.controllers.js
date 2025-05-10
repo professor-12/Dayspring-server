@@ -8,13 +8,18 @@ export const addToCart = async (req, res) => {
         productId,
         quantity,
     });
-    console.log("Adding to cart", userId);
     if (!userId) {
         return res.status(401).json({ message: "User not authenticated." });
     }
+    let cart;
     try {
-        let cart = await prisma.cart.findFirst({ where: { userId } });
+        cart = await prisma.cart.findFirst({ where: { userId } });
         if (!cart) {
+            if (quantity == 0) {
+                return res
+                    .status(400)
+                    .json({ message: "Quantity must be at least 1" });
+            }
             cart = await prisma.cart.create({
                 data: {
                     userId,
@@ -27,7 +32,6 @@ export const addToCart = async (req, res) => {
                 .status(201)
                 .json({ message: "Cart created and item added." });
         }
-
         const existingItem = await prisma.cartItem.findFirst({
             where: {
                 cartId: cart.id,
@@ -51,7 +55,6 @@ export const addToCart = async (req, res) => {
                 },
             });
         }
-
         return res.status(201).json({ message: "Item added to cart." });
     } catch (err) {
         console.error(err);
@@ -80,7 +83,6 @@ export const getCart = async (req, res) => {
         if (!cart) {
             return res.status(404).json({ message: "Cart not found." });
         }
-
         return res.status(200).json(cart);
     } catch (err) {
         console.error(err);
@@ -93,7 +95,6 @@ export const getCart = async (req, res) => {
 export const removeFromCart = async (req, res) => {
     const userId = req.user.id;
     const { productId } = req.body;
-
     if (!userId) {
         return res.status(401).json({ message: "User not authenticated." });
     }
@@ -158,7 +159,6 @@ export const updateCartItem = async (req, res) => {
         if (!itemToUpdate) {
             return res.status(404).json({ message: "Item not found in cart." });
         }
-
         await prisma.cartItem.update({
             where: { id: itemToUpdate.id },
             data: { quantity },
