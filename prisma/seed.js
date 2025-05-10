@@ -77,6 +77,8 @@ async function main() {
 }
 main()
     .then(async () => {
+      console.log("Finish seeding databse")
+      console.log("Yo are too lazy bro... ")
         await prisma.$disconnect();
     })
     .catch(async (e) => {
