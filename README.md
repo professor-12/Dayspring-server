@@ -5,37 +5,43 @@
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v16+ recommended)
-- Yarn (or npm)
-- PostgreSQL (or any database supported by Prisma)
+
+-   Node.js (v16+ recommended)
+-   Yarn (or npm)
+-   PostgreSQL (or any database supported by Prisma)
+
 ---
 
 ### 🛠️ Setup Instructions
 
-1. **Navigate to the server directory**  
-   ```bash
-   cd server
-   ```
+1. **Navigate to the server directory**
 
-2. **Install dependencies**  
-   ```bash
-   yarn install
-   ```
+    ```bash
+    cd server
+    ```
 
-3. **Push Prisma schema to database**  
-   ```bash
-   npx prisma db push
-   ```
+2. **Install dependencies**
 
-4. **Seed the database**  
-   ```bash
-   npx prisma db seed
-   ```
+    ```bash
+    yarn install
+    ```
 
-5. **Run the development server**  
-   ```bash
-   yarn dev
-   ```
+3. **Push Prisma schema to database**
+
+    ```bash
+    npx prisma db push
+    ```
+
+4. **Seed the database (This will create 50 new products in the database automatically)**
+
+    ```bash
+    npx prisma db seed
+    ```
+
+5. **Run the development server**
+    ```bash
+    yarn dev
+    ```
 
 ---
 
@@ -43,17 +49,21 @@
 
 ### 🧑‍💼 Auth
 
-#### 🔐 Login  
-**POST** `/api/auth/login`  
+#### 🔐 Login
+
+**POST** `/api/auth/login`
+
 ```json
 {
-  "username": "",
-  "password": ""
+    "username": "",
+    "password": ""
 }
 ```
 
-#### 📝 Register  
-**POST** `/api/auth/register`  
+#### 📝 Register
+
+**POST** `/api/auth/register`
+
 ```json
 {
   "email": "",
@@ -67,16 +77,19 @@
 
 ### 🛒 Cart
 
-#### ➕ Add to Cart  
-**POST** `/api/addcart`  
+#### ➕ Add to Cart
+
+**POST** `/api/addcart`
+
 ```json
 {
-  "productId": "",
-  "quantity": 0
+    "productId": "",
+    "quantity": 0
 }
 ```
 
-#### 🛍️ Get User Cart  
+#### 🛍️ Get User Cart
+
 **GET** `/api/getcart`  
 _Requires authentication_
 
@@ -84,12 +97,14 @@ _Requires authentication_
 
 ### 📦 Products
 
-#### 🔎 Get All Products  
+#### 🔎 Get All Products
+
 **GET** `/api/products`  
-**Headers:**  
+**Headers:**
+
 ```json
 {
-  "Authorization": "Bearer <userToken>"
+    "Authorization": "Bearer <userToken>"
 }
 ```
 
@@ -97,5 +112,5 @@ _Requires authentication_
 
 ## 📘 Notes
 
-- Swagger documentation available at:  
-  **`http://localhost:8000/api-docs`**
+-   Swagger documentation available at:  
+    **`http://localhost:8000/api-docs`**
